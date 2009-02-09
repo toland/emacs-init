@@ -42,6 +42,7 @@
 (require 'init-perl)
 (require 'init-ruby)
 (require 'init-js)
+(require 'init-erlang)
 
 (regen-autoloads)
 (load custom-file 'noerror)

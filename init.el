@@ -1,7 +1,5 @@
 ;;; init.el --- Where all the magic begins
 ;;
-;; Part of the Emacs Starter Kit
-;;
 ;; This is the first thing to get loaded.
 ;;
 ;; "Emacs outshines all other editing software in approximately the
@@ -35,15 +33,15 @@
 ;; out-of-date js stuff. TODO: fix it to use ELPA dependencies
 (load "vendor/nxhtml/autostart")
 
-(require 'starter-kit-defuns)
-(require 'starter-kit-bindings)
-(require 'starter-kit-misc)
-(require 'starter-kit-registers)
-(require 'starter-kit-eshell)
-(require 'starter-kit-lisp)
-(require 'starter-kit-perl)
-(require 'starter-kit-ruby)
-;; (require 'starter-kit-js)
+(require 'init-defuns)
+(require 'init-bindings)
+(require 'init-misc)
+(require 'init-registers)
+(require 'init-eshell)
+(require 'init-lisp)
+(require 'init-perl)
+(require 'init-ruby)
+(require 'init-js)
 
 (regen-autoloads)
 (load custom-file 'noerror)

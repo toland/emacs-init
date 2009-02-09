@@ -1,6 +1,4 @@
-;;; starter-kit-ruby.el --- Some helpful Ruby code
-;;
-;; Part of the Emacs Starter Kit
+;;; init-ruby.el --- Some helpful Ruby code
 
 (eval-after-load 'ruby-mode
   '(progn
@@ -91,5 +89,5 @@ exec-to-string command, but it works and seems fast"
 ;; TODO: set up ri
 ;; TODO: electric
 
-(provide 'starter-kit-ruby)
-;; starter-kit-ruby.el ends here
+(provide 'init-ruby)
+;; init-ruby.el ends here

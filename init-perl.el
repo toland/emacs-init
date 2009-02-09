@@ -1,6 +1,4 @@
-;;; starter-kit-perl.el --- Some helpful Perl code
-;;
-;; Part of the Emacs Starter Kit
+;;; init-perl.el --- Some helpful Perl code
 
 (eval-after-load 'cperl-mode
   '(progn
@@ -19,5 +17,5 @@
 ;; TODO: flymake
 ;; TODO: electric bugaloo 
 
-(provide 'starter-kit-perl)
-;; starter-kit-perl.el ends here
+(provide 'init-perl)
+;; init-perl.el ends here

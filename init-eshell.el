@@ -1,6 +1,4 @@
-;;; starter-kit-eshell.el --- Making the defaults a bit saner
-;;
-;; Part of the Emacs Starter Kit
+;;; init-eshell.el --- Making the defaults a bit saner
 
 (setq eshell-cmpl-cycle-completions nil
       eshell-save-history-on-exit t
@@ -26,5 +24,5 @@
                   '("tar" "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'"))
      (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
 
-(provide 'starter-kit-eshell)
-;;; starter-kit-eshell.el ends here
+(provide 'init-eshell)
+;;; init-eshell.el ends here

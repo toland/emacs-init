@@ -1,6 +1,4 @@
-;;; starter-kit-registers.el --- Set up registers
-;;
-;; Part of the Emacs Starter Kit
+;;; init-registers.el --- Set up registers
 
 ;; Registers allow you to jump to a file or other location
 ;; quickly. Use C-x r j followed by the letter of the register (i for
@@ -13,5 +11,5 @@
              (?r (file . ,(concat dotfiles-dir "starter-kit-registers.el")))))
   (set-register (car r) (cadr r)))
 
-(provide 'starter-kit-registers)
-;;; starter-kit-registers.el ends here
+(provide 'init-registers)
+;;; init-registers.el ends here

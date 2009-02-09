@@ -1,6 +1,4 @@
-;;; starter-kit-js.el --- Some helpful Javascript helpers
-;;
-;; Part of the Emacs Starter Kit
+;;; init-js.el --- Some helpful Javascript helpers
 
 (eval-after-load 'js2-mode
   '(progn
@@ -84,5 +82,5 @@
     (insert (pp json-object))
     (goto-char (point-min))))
 
-(provide 'starter-kit-js)
-;;; starter-kit-js.el ends here
+(provide 'init-js)
+;;; init-js.el ends here

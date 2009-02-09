@@ -1,6 +1,4 @@
-;;; starter-kit-misc.el --- Things that don't fit anywhere else
-;;
-;; Part of the Emacs Starter Kit
+;;; init-misc.el --- Things that don't fit anywhere else
 
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
@@ -114,5 +112,5 @@
      (set-face-foreground 'magit-diff-add "green3")
      (set-face-foreground 'magit-diff-del "red3")))
 
-(provide 'starter-kit-misc)
-;;; starter-kit-misc.el ends here
+(provide 'init-misc)
+;;; init-misc.el ends here

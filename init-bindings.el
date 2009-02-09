@@ -1,6 +1,4 @@
-;;; starter-kit-bindings.el --- Set up some handy key bindings
-;;
-;; Part of the Emacs Starter Kit.
+;;; init-bindings.el --- Set up some handy key bindings
 
 ;; TODO: switch to kbd invocations everywhere
 
@@ -90,5 +88,5 @@
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
-(provide 'starter-kit-bindings)
-;;; starter-kit-bindings.el ends here
+(provide 'init-bindings)
+;;; init-bindings.el ends here

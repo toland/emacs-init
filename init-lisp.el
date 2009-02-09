@@ -1,6 +1,4 @@
-;;; starter-kit-lisp.el --- Some helpful Lisp code
-;;
-;; Part of the Emacs Starter Kit
+;;; init-lisp.el --- Some helpful Lisp code
 
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 (define-key lisp-mode-shared-map (kbd "C-c l") "lambda")
@@ -61,5 +59,5 @@
 (font-lock-add-keywords 'lisp-mode
 			'(("(\\|)" . 'esk-paren-face)))
 
-(provide 'starter-kit-lisp)
-;; starter-kit-lisp.el ends here
+(provide 'init-lisp)
+;; init-lisp.el ends here

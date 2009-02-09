@@ -1,6 +1,4 @@
-;;; starter-kit-defuns.el --- Define some custom functions
-;;
-;; Part of the Emacs Starter Kit
+;;; init-defuns.el --- Define some custom functions
 
 (require 'thingatpt)
 (require 'imenu)
@@ -161,5 +159,5 @@
   (interactive)
   (message (if (y-or-n-p "Do you have a test for that? ") "Good." "Bad!")))
 
-(provide 'starter-kit-defuns)
-;;; starter-kit-defuns.el ends here
+(provide 'init-defuns)
+;;; init-defuns.el ends here

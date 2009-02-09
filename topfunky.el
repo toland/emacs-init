@@ -27,16 +27,16 @@
 (setq backup-directory-alist (list (cons "." backup-dir)))
 
 ;; Snippets
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet.el"))
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet"))
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory (concat dotfiles-dir "/vendor/yasnippet.el/snippets"))
+(yas/load-directory (concat dotfiles-dir "/vendor/yasnippet/snippets"))
 
 ;; Commands
 (require 'unbound)
 
 ;; Minor Modes
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/textmate.el"))
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/textmate"))
 (require 'textmate)
 (textmate-mode)
 (require 'whitespace)

@@ -14,7 +14,6 @@
 
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/vendor"))
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/jabber"))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
@@ -47,9 +46,6 @@
 (regen-autoloads)
 (load custom-file 'noerror)
 
-;; More complicated packages that haven't made it into ELPA yet
-
-(autoload 'jabber-connect "jabber" "" t)
 ;; TODO: rinari, slime
 
 ;; Work around a bug on OS X where system-name is FQDN

@@ -40,7 +40,7 @@
 
 (require 'package)
 (package-initialize)
-(require 'starter-kit-elpa)
+;;(require 'starter-kit-elpa)
 
 ;; Load up starter kit customizations
 
@@ -52,7 +52,7 @@
 (require 'starter-kit-lisp)
 (require 'starter-kit-perl)
 (require 'starter-kit-ruby)
-(require 'starter-kit-js)
+;; (require 'starter-kit-js)
 
 (regen-autoloads)
 (load custom-file 'noerror)
@@ -77,4 +77,5 @@
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
+(provide 'init)
 ;;; init.el ends here

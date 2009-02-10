@@ -1,50 +1,44 @@
 ;;; init-bindings.el --- Set up some handy key bindings
 
-;; Todo: switch to kbd invocations everywhere
-
 ;; Find unbound keys
 (require 'unbound)
 
-
+;; Key bindings and more from TextMate
 (require 'textmate)
 (textmate-mode t)
 
-
 ;; You know, like Readline.
-(global-set-key "\C-\M-h" 'backward-kill-word)
+(global-set-key (kbd "C-M-h") 'backward-kill-word)
 
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
-
-;; Completion that uses many different methods to find options.
-(global-set-key (kbd "M-/") 'dabbrev-expand)
 
 ;; Perform general cleanup.
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
 ;; Use regex searches by default.
-(global-set-key "\C-s" 'isearch-forward-regexp)
-(global-set-key "\C-r" 'isearch-backward-regexp)
-(global-set-key "\C-\M-s" 'isearch-forward)
-(global-set-key "\C-\M-r" 'isearch-backward)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; Jump to a definition in the current file. (This is awesome.)
-(global-set-key "\C-x\C-i" 'ido-imenu)
+(global-set-key (kbd "C-x i") 'ido-imenu)
 
 ;; File finding
 (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
 (global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
 (global-set-key (kbd "C-x f") 'recentf-ido-find-file)
-(global-set-key (kbd "C-x C-p") 'find-file-at-point)
+(global-set-key (kbd "C-x p") 'find-file-at-point)
 (global-set-key (kbd "C-c y") 'bury-buffer)
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Window switching. (C-x o goes to the next window)
-(windmove-default-keybindings) ;; Shift+direction
+;(windmove-default-keybindings) ;; Shift+direction
 (global-set-key "\C-xO" (lambda () (interactive) (other-window -1))) ;; back one
-(global-set-key "\C-x\C-o" (lambda () (interactive) (other-window 2))) ;; forward two
+;(global-set-key "\C-x\C-o" (lambda () (interactive) (other-window 2))) ;; forward two
 
 ;; Start eshell or switch to it if it's active.
 (global-set-key (kbd "C-x m") 'eshell)
@@ -67,42 +61,22 @@
 ;; Should be able to eval-and-replace anywhere.
 (global-set-key (kbd "C-c e") 'eval-and-replace)
 
-;; Applications
-
-(global-set-key (kbd "C-x g") 'magit-status)
-
+;; What it says on the box - toggle full screen mode
 (global-set-key (kbd "M-n") 'toggle-fullscreen)
-
 
 ;; Split Windows
 (global-set-key [f6] 'split-window-horizontally)
 (global-set-key [f7] 'split-window-vertically)
 (global-set-key [f8] 'delete-window)
 
-;; Some Mac-friendly key counterparts
-(global-set-key (kbd "M-s") 'save-buffer)
-(global-set-key (kbd "M-z") 'undo)
+;(global-set-key [(meta shift right)] 'ido-switch-buffer)
+;(global-set-key [(meta shift up)] 'recentf-ido-find-file)
+;(global-set-key [(meta shift down)] 'ido-find-file)
+;(global-set-key [(meta shift left)] 'magit-status)
 
-;; Keyboard Overrides
-;(define-key textile-mode-map (kbd "M-s") 'save-buffer)
-(define-key text-mode-map (kbd "M-s") 'save-buffer)
-
-(global-set-key [(meta up)] 'beginning-of-buffer)
-(global-set-key [(meta down)] 'end-of-buffer)
-
-(global-set-key [(meta shift right)] 'ido-switch-buffer)
-(global-set-key [(meta shift up)] 'recentf-ido-find-file)
-(global-set-key [(meta shift down)] 'ido-find-file)
-(global-set-key [(meta shift left)] 'magit-status)
-
-(global-set-key [(meta H)] 'delete-other-windows)
+;(global-set-key [(meta H)] 'delete-other-windows)
 
 (global-set-key [(meta D)] 'backward-kill-word) ;; (meta d) is opposite
-
-(global-set-key [(meta N)] 'cleanup-buffer)
-
-(global-set-key [(control \])] 'indent-rigidly)
-
 
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o")

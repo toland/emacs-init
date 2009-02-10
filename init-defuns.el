@@ -20,7 +20,7 @@
 
 ;; Buffer-related
 
-(defun ido-imenu ()
+(defun ido-goto-symbol ()
   "Update the imenu index and then use ido to select a symbol to navigate to."
   (interactive)
   (imenu--make-index-alist)

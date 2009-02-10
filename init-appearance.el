@@ -47,6 +47,10 @@
 ;; Force imenu to rescan buffers
 (set-default 'imenu-auto-rescan t)
 
+;; Show line numbers in buffer
+(require 'linum)
+(global-linum-mode t)
+
 ;; Font
 ;(set-face-font 'default "-apple-anonymous-medium-r-normal--14-*-*-*-*-*-iso10646-1")
 (set-face-attribute 'default nil :family "anonymous" :height 140)

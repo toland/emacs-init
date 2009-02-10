@@ -1,5 +1,7 @@
 ;;; init-vc.el --- Version control and related stuff
 
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
 

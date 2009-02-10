@@ -44,6 +44,14 @@
       ido-use-filename-at-point t
       ido-max-prospects 10)
 
+;; imenu
+
+;; ‘font-lock-mode-hook’ is run immediately after entering every major mode.
+;; Make use of this to add an Imenu index to the menu bar in any mode that supports it:
+(defun try-to-add-imenu ()
+  (condition-case nil (imenu-add-menubar-index) (error nil)))
+(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+
 ;; Force imenu to rescan buffers
 (set-default 'imenu-auto-rescan t)
 

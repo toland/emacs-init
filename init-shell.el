@@ -1,5 +1,6 @@
-;;; init-eshell.el --- Making the defaults a bit saner
+;;; init-shell.el --- Making the defaults a bit saner
 
+;; eshell
 (setq eshell-cmpl-cycle-completions nil
       eshell-save-history-on-exit t
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
@@ -24,5 +25,10 @@
                   '("tar" "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'"))
      (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
 
-(provide 'init-eshell)
-;;; init-eshell.el ends here
+
+;; shell mode
+(require 'ansi-color)
+
+
+(provide 'init-shell)
+;;; init-shell.el ends here

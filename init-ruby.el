@@ -12,9 +12,12 @@
 (global-set-key (kbd "C-h r") 'ri)
 
 ;; Rake files are ruby, too, as are gemspecs.
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.sake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
@@ -22,7 +25,7 @@
 ;;; Rake
 
 (defun pcomplete/rake ()
-  "Completion rules for the `ssh' command."
+  "Completion rules for the `rake' command."
   (pcomplete-here (pcmpl-rake-tasks)))
 
 (defun pcmpl-rake-tasks ()
@@ -82,12 +85,32 @@ exec-to-string command, but it works and seems fast"
                                   'flymake-display-err-menu-for-current-line)
                    (flymake-mode t))))))
 
+;; TODO: set up ri
+;; TODO: electric
+
+;; Rinari
+;; (require 'rinari)
+
+;; HAML and SASS
+(autoload 'haml-mode "haml-mode.el"
+  "Major mode for editing HAML files" t)
+
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+
+;(define-key haml-mode-map [(control meta down)] 'haml-forward-sexp)
+;(define-key haml-mode-map [(control meta up)] 'haml-backward-sexp)
+;(define-key haml-mode-map [(control meta left)] 'haml-up-list)
+;(define-key haml-mode-map [(control meta right)] 'haml-down-list)
+
+(autoload 'sass-mode "sass-mode.el"
+  "Major mode for editing SASS files" t)
+
+(add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
+
 (eval-after-load 'haml-mode
   (if (functionp 'whitespace-mode)
       (add-hook 'haml-mode-hook 'whitespace-mode)))
 
-;; TODO: set up ri
-;; TODO: electric
 
 (provide 'init-ruby)
 ;; init-ruby.el ends here

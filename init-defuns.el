@@ -3,6 +3,8 @@
 (require 'thingatpt)
 (require 'imenu)
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Network
 
 (defun view-url ()
@@ -154,10 +156,12 @@
   (interactive)
   (insert (format-time-string "%c" (current-time))))
 
-(defun pairing-bot ()
-  "If you can't pair program with a human, use this instead."
+;; Full screen toggle
+(defun toggle-fullscreen ()
   (interactive)
-  (message (if (y-or-n-p "Do you have a test for that? ") "Good." "Bad!")))
+  (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
+                                           nil
+                                         'fullboth)))
 
 (provide 'init-defuns)
 ;;; init-defuns.el ends here

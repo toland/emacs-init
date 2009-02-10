@@ -1,159 +1,72 @@
-;; DESCRIPTION: topfunky settings
+;;; init-appearance.el --- User interface configuration
 
-(add-to-list 'load-path (concat dotfiles-dir "/vendor"))
+;; get rid of the default messages on startup
+(setq initial-scratch-message nil)
+(setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message t)
 
-;; Save backups in one place
-;; Put autosave files (ie #foo#) in one place, *not*
-;; scattered all over the file system!
-(defvar autosave-dir
- (concat "/tmp/emacs_autosaves/" (user-login-name) "/"))
+;; Enable the mouse wheel
+(mouse-wheel-mode t)
 
-(make-directory autosave-dir t)
+;; Highlight the active region
+(setq transient-mark-mode t)
 
-(defun auto-save-file-name-p (filename)
-  (string-match "^#.*#$" (file-name-nondirectory filename)))
+;; Readable unique buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
-(defun make-auto-save-file-name ()
-  (concat autosave-dir
-   (if buffer-file-name
-      (concat "#" (file-name-nondirectory buffer-file-name) "#")
-    (expand-file-name
-     (concat "#%" (buffer-name) "#")))))
+;; turn off the visible cursor in non-selected windows
+(setq-default cursor-in-non-selected-windows nil)
 
-;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
-;; list contains regexp=>directory mappings; filenames matching a regexp are
-;; backed up in the corresponding directory. Emacs will mkdir it if necessary.)
-(defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
-(setq backup-directory-alist (list (cons "." backup-dir)))
+;; can be set to '(bar . 2) or 't
+(setq-default cursor-type '(hbar . 2))
 
-;; Snippets
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet"))
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory (concat dotfiles-dir "/vendor/yasnippet/snippets"))
+;; turn the blinking off
+(blink-cursor-mode -1)
 
-;; Commands
-(require 'unbound)
+;; turn off the tool-bar
+(tool-bar-mode -1)
 
-;; Minor Modes
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/textmate"))
-(require 'textmate)
-(textmate-mode)
-(require 'whitespace)
+;; Highlight matching parentheses when the point is on them.
+(show-paren-mode 1)
 
-;; Major Modes
+;; Display a glyph in the fringe on empty lines
+(setq-default indicate-empty-lines t)
 
-;; Javascript
-;; TODO javascript-indent-level 2
+;; Don't wrap long lines
+(setq-default truncate-lines t)
 
-;; Rinari
-;; (add-to-list 'load-path (concat dotfiles-dir "/vendor/rinari"))
-;; (require 'rinari)
+;; ido-mode is like magic pixie dust!
+(ido-mode t)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point t
+      ido-max-prospects 10)
 
-(require 'textile-mode)
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
-
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode for editing Markdown files" t)
-
-(require 'haml-mode)
-(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
-(define-key haml-mode-map [(control meta down)] 'haml-forward-sexp)
-(define-key haml-mode-map [(control meta up)] 'haml-backward-sexp)
-(define-key haml-mode-map [(control meta left)] 'haml-up-list)
-(define-key haml-mode-map [(control meta right)] 'haml-down-list)
-
-(require 'sass-mode)
-(add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
-
-(add-to-list 'auto-mode-alist '("\\.sake\\'" . ruby-mode))
-
-;; XCODE
-(require 'cc-mode)
-(require 'xcode)
-(define-key objc-mode-map [(meta r)] 'xcode-compile)
-(define-key objc-mode-map [(meta K)] 'xcode-clean)
-(add-hook 'c-mode-common-hook
-          (lambda()
-            (local-set-key  [(meta O)] 'ff-find-other-file)))
-(add-hook 'c-mode-common-hook
-          (lambda()
-            (local-set-key (kbd "C-c <right>") 'hs-show-block)
-            (local-set-key (kbd "C-c <left>")  'hs-hide-block)
-            (local-set-key (kbd "C-c <up>")    'hs-hide-all)
-            (local-set-key (kbd "C-c <down>")  'hs-show-all)
-            (hs-minor-mode t)))             ; Hide and show blocks
+;; Force imenu to rescan buffers
+(set-default 'imenu-auto-rescan t)
 
 ;; Font
-(set-face-font 'default "-apple-inconsolata-medium-r-normal--20-0-72-72-m-0-iso10646-1")
+;(set-face-font 'default "-apple-anonymous-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+(set-face-attribute 'default nil :family "anonymous" :height 140)
+
+;; Font lock
+(global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
 
 ;; Color Themes
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/color-theme"))
 (require 'color-theme)
 (color-theme-initialize)
-
-;; Functions
-
-(require 'line-num)
-
-;; Full screen toggle
-(defun toggle-fullscreen ()
-  (interactive)
-  (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
-                                           nil
-                                         'fullboth)))
-(global-set-key (kbd "M-n") 'toggle-fullscreen)
-
-
-;; Keyboard
-
-;; Split Windows
-(global-set-key [f6] 'split-window-horizontally)
-(global-set-key [f7] 'split-window-vertically)
-(global-set-key [f8] 'delete-window)
-
-;; Some Mac-friendly key counterparts
-(global-set-key (kbd "M-s") 'save-buffer)
-(global-set-key (kbd "M-z") 'undo)
-
-;; Keyboard Overrides
-(define-key textile-mode-map (kbd "M-s") 'save-buffer)
-(define-key text-mode-map (kbd "M-s") 'save-buffer)
-
-(global-set-key [(meta up)] 'beginning-of-buffer)
-(global-set-key [(meta down)] 'end-of-buffer)
-
-(global-set-key [(meta shift right)] 'ido-switch-buffer)
-(global-set-key [(meta shift up)] 'recentf-ido-find-file)
-(global-set-key [(meta shift down)] 'ido-find-file)
-(global-set-key [(meta shift left)] 'magit-status)
-
-(global-set-key [(meta H)] 'delete-other-windows)
-
-(global-set-key [(meta D)] 'backward-kill-word) ;; (meta d) is opposite
-
-(global-set-key [(meta N)] 'cleanup-buffer)
-
-(global-set-key [(control \])] 'indent-rigidly)
-
-;; Other
-
-(prefer-coding-system 'utf-8)
-
-(server-start)
-
-;; Experimentation
-;; TODO Move to separate theme file.
+(setq color-theme-is-global t)
 
 ;;; theme-start
-(defun topfunky-reload-theme ()
-  "Reload init.el and the color-theme-helvetica"
+(defun reload-anonymous-theme ()
+  "Reload init.el and the color-theme-anonymous"
   (interactive)
   (save-buffer)
   (eval-buffer)
-  (color-theme-helvetica))
-
-(global-set-key [f8] 'topfunky-reload-theme)
+  (color-theme-anonymous))
 
 ;; theme-colors
 ;; yellow: #ffffcc
@@ -163,11 +76,11 @@
 ;; greys: #aa, #bb, #cc
 ;; light blue:    #c2cff1
 
-(defun color-theme-helvetica ()
-  "Attempt at a modern theme."
+(defun color-theme-anonymous ()
+  "Attempt at a modern theme. Based on the Helvetica theme."
   (interactive)
   (color-theme-install
-   '(color-theme-helvetica
+   '(color-theme-anonymous
      ((background-color . "#444444")
       (background-mode . dark)
       (border-color . "black")
@@ -194,7 +107,7 @@
       (list-matching-lines-face . bold)
       (view-highlight-face . highlight)
       (widget-mouse-face . highlight))
-     (default ((t (:stipple nil :foreground "#aaaaaa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Inconsolata"))))
+     (default ((t (:stipple nil :foreground "#aaaaaa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Anonymous"))))
      (bbdb-field-name ((t (:foreground "green"))))
      (bg:erc-color-face0 ((t (:background "White"))))
      (bg:erc-color-face1 ((t (:background "black"))))
@@ -276,7 +189,7 @@
      (eshell-ls-unreadable-face ((t (:foreground "DimGray"))))
      (eshell-prompt-face ((t (:foreground "powder blue"))))
      (face-1 ((t (:stipple nil :foreground "royal blue" :family "andale mono"))))
-     (face-2 ((t (:stipple nil :foreground "DeepSkyBlue1" :overline nil :underline nil :slant normal :family "Inconsolata"))))
+     (face-2 ((t (:stipple nil :foreground "DeepSkyBlue1" :overline nil :underline nil :slant normal :family "Anonymous"))))
      (face-3 ((t (:stipple nil :foreground "NavajoWhite3"))))
      (fg:erc-color-face0 ((t (:foreground "white"))))
      (fg:erc-color-face1 ((t (:foreground "beige"))))
@@ -294,14 +207,15 @@
      (fg:erc-color-face7 ((t (:foreground "pale green"))))
      (fg:erc-color-face8 ((t (:foreground "medium spring green"))))
      (fg:erc-color-face9 ((t (:foreground "khaki"))))
-     (fixed-pitch ((t (:family "Inconsolata"))))
+     (fixed-pitch ((t (:family "Anonymous"))))
      (font-lock-builtin-face ((t (:bold t :foreground "#c2cff1" :weight bold))))
      (font-lock-comment-face ((t (:foreground "#777"))))
      (font-lock-constant-face ((t (:bold t :foreground "#52c62b" :weight bold))))
      (font-lock-doc-face ((t (:italic t :slant italic :foreground "#6688ee"))))
      (font-lock-doc-string-face ((t (:foreground "#6688ee"))))
      (font-lock-function-name-face ((t (:bold t :foreground "#ffffbb" :weight bold))))
-     (font-lock-keyword-face ((t (:foreground "#888"))))
+     ;(font-lock-keyword-face ((t (:foreground "#888"))))
+     (font-lock-keyword-face ((t (:foreground "#c2cff1"))))
      (font-lock-preprocessor-face ((t (:foreground "#6688ee"))))
      (font-lock-reference-face ((t (:foreground "#c2cff1"))))
      (font-lock-string-face ((t (:italic t :foreground "#ffffcc" :slant italic))))
@@ -397,21 +311,21 @@
      (message-mml-face ((t (:foreground "ForestGreen"))))
      (message-separator-face ((t (:background "cornflower blue" :foreground "chocolate"))))
 
-     (modeline ((t (:background "#3c3c3c" :foreground "#777777" ))))
-     (modeline-buffer-id ((t (:bold t :foreground "White" :weight bold :family "Helvetica Neue"))))
-     (modeline-inactive ((t (:background "#444444" :foreground "#505050"))))
-     (modeline-mousable ((t (:bold t :background "dark olive green" :foreground "yellow green" :weight bold :family "Helvetica Neue"))))
-     (modeline-mousable-minor-mode ((t (:bold t :background "dark olive green" :foreground "wheat" :weight bold :family "Helvetica Neue"))))
+     ;(modeline ((t (:background "#3c3c3c" :foreground "#777777" ))))
+     ;(modeline-buffer-id ((t (:bold t :foreground "White" :weight bold :family "Helvetica Neue"))))
+     ;(modeline-inactive ((t (:background "#444444" :foreground "#505050"))))
+     ;(modeline-mousable ((t (:bold t :background "dark olive green" :foreground "yellow green" :weight bold :family "Helvetica Neue"))))
+     ;(modeline-mousable-minor-mode ((t (:bold t :background "dark olive green" :foreground "wheat" :weight bold :family "Helvetica Neue"))))
 
      (mouse ((t (:background "Grey"))))
      (paren-blink-off ((t (:foreground "brown"))))
      (region ((t (:background "#222222"))))
      (ruler-mode-column-number-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Inconsolata" :foreground "black"))))
-     (ruler-mode-current-column-face ((t (:bold t :box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :width normal :family "Inconsolata" :foreground "yellow" :weight bold))))
-     (ruler-mode-default-face ((t (:family "Inconsolata" :width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :inverse-video nil :stipple nil :background "grey76" :foreground "grey64" :box (:color "grey76" :line-width 1 :style released-button)))))
-     (ruler-mode-fill-column-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Inconsolata" :foreground "red"))))
-     (ruler-mode-margins-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :foreground "grey64" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Inconsolata" :background "grey64"))))
-     (ruler-mode-tab-stop-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Inconsolata" :foreground "steelblue"))))
+     (ruler-mode-current-column-face ((t (:bold t :box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :width normal :family "Anonymous" :foreground "yellow" :weight bold))))
+     (ruler-mode-default-face ((t (:family "Anonymous" :width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :inverse-video nil :stipple nil :background "grey76" :foreground "grey64" :box (:color "grey76" :line-width 1 :style released-button)))))
+     (ruler-mode-fill-column-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Anonymous" :foreground "red"))))
+     (ruler-mode-margins-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :foreground "grey64" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Anonymous" :background "grey64"))))
+     (ruler-mode-tab-stop-face ((t (:box (:color "grey76" :line-width 1 :style released-button) :background "grey76" :stipple nil :inverse-video nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :family "Anonymous" :foreground "steelblue"))))
      (scroll-bar ((t (nil))))
      (secondary-selection ((t (:background "Aquamarine" :foreground "SlateBlue"))))
      (show-paren-match-face ((t (:bold t :background "#333333" :foreground "White" :weight bold))))
@@ -427,7 +341,7 @@
      (w3m-arrived-anchor-face ((t (:bold t :foreground "DodgerBlue3" :weight bold))))
      (w3m-header-line-location-content-face ((t (:background "dark olive green" :foreground "wheat"))))
      (w3m-header-line-location-title-face ((t (:background "dark olive green" :foreground "beige"))))
-     (widget-button-face ((t (:bold t :foreground "green" :weight bold :family "Inconsolata"))))
+     (widget-button-face ((t (:bold t :foreground "green" :weight bold :family "Anonymous"))))
      (widget-button-pressed-face ((t (:foreground "red"))))
      (widget-documentation-face ((t (:foreground "lime green"))))
      (widget-field-face ((t (:foreground "LightBlue"))))
@@ -441,4 +355,8 @@
 ;;; theme-end
 
 ;; Activate theme
-(color-theme-helvetica)
+(color-theme-anonymous)
+
+
+(provide 'init-appearance)
+;;; init-appearance.el ends here

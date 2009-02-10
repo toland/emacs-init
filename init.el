@@ -13,40 +13,62 @@
                     (or (buffer-file-name) load-file-name)))
 
 (add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path (concat dotfiles-dir "/vendor"))
+
+(let* ((my-lisp-dir (concat dotfiles-dir "/vendor"))
+       (default-directory my-lisp-dir))
+  (add-to-list 'load-path my-lisp-dir)
+  (normal-top-level-add-subdirs-to-load-path))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
+(setq save-place-file (concat dotfiles-dir "places"))
+
+;; Don't clutter up directories with files~
+(setq backup-directory-alist `(("." . ,(expand-file-name
+                                        (concat dotfiles-dir "backups")))))
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+;; Set this to whatever browser you use
+(setq browse-url-browser-function 'browse-default-macosx-browser)
+;; (setq browse-url-browser-function 'browse-default-windows-browser)
+;; (setq browse-url-browser-function 'browse-default-kde)
+;; (setq browse-url-browser-function 'browse-default-epiphany)
+;; (setq browse-url-browser-function 'browse-default-w3m)
+;; (setq browse-url-browser-function 'browse-url-firefox)
+;; (setq browse-url-browser-function 'browse-url-generic
+;;       browse-url-generic-program "~/src/conkeror/conkeror")
 
 ;; These should be loaded on startup rather than autoloaded on demand
 ;; since they are likely to be used in every session
 
 (require 'cl)
-(require 'saveplace)
 (require 'ffap)
-(require 'uniquify)
-(require 'ansi-color)
-(require 'recentf)
+(require 'saveplace)
 
-;; this must be loaded before ELPA since it bundles its own
-;; out-of-date js stuff. TODO: fix it to use ELPA dependencies
-(load "vendor/nxhtml/autostart")
+;; Save a list of recent files visited.
+(require 'recentf)
+(recentf-mode 1)
 
 (require 'init-defuns)
 (require 'init-bindings)
-(require 'init-misc)
-(require 'init-registers)
-(require 'init-eshell)
+(require 'init-appearance)
+(require 'init-text)
+(require 'init-vc)
+(require 'init-shell)
 (require 'init-lisp)
 (require 'init-perl)
 (require 'init-ruby)
 (require 'init-js)
+(require 'init-c)
 (require 'init-erlang)
+
+(require 'init-registers)
 
 (regen-autoloads)
 (load custom-file 'noerror)
-
-;; TODO: rinari, slime
 
 ;; Work around a bug on OS X where system-name is FQDN
 (if (eq system-type 'darwin)
@@ -62,6 +84,8 @@
 (if (file-exists-p user-specific-config) (load user-specific-config))
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
+
+(server-start)
 
 (provide 'init)
 ;;; init.el ends here

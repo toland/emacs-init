@@ -1,5 +1,7 @@
 ;;; init-js.el --- Some helpful Javascript helpers
 
+(add-to-list 'auto-mode-alist '("\\.js\\(on\\)?$" . js2-mode))
+
 (eval-after-load 'js2-mode
   '(progn
 

@@ -1,6 +1,14 @@
 ;;; init-bindings.el --- Set up some handy key bindings
 
-;; TODO: switch to kbd invocations everywhere
+;; Todo: switch to kbd invocations everywhere
+
+;; Find unbound keys
+(require 'unbound)
+
+
+(require 'textmate)
+(textmate-mode t)
+
 
 ;; You know, like Readline.
 (global-set-key "\C-\M-h" 'backward-kill-word)
@@ -13,9 +21,6 @@
 
 ;; Perform general cleanup.
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
-
-;; Turn on the menu bar for exploring new modes
-(global-set-key [f1] 'menu-bar-mode)
 
 ;; Use regex searches by default.
 (global-set-key "\C-s" 'isearch-forward-regexp)
@@ -66,14 +71,38 @@
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(global-set-key (kbd "M-n") 'toggle-fullscreen)
 
-;; This is a little hacky since VC doesn't support git add internally
-(eval-after-load 'vc
-  (define-key vc-prefix-map "i" '(lambda () (interactive)
-                                   (if (not (eq 'Git (vc-backend buffer-file-name)))
-                                       (vc-register)
-                                     (shell-command (format "git add %s" buffer-file-name))
-                                     (message "Staged changes.")))))
+
+;; Split Windows
+(global-set-key [f6] 'split-window-horizontally)
+(global-set-key [f7] 'split-window-vertically)
+(global-set-key [f8] 'delete-window)
+
+;; Some Mac-friendly key counterparts
+(global-set-key (kbd "M-s") 'save-buffer)
+(global-set-key (kbd "M-z") 'undo)
+
+;; Keyboard Overrides
+;(define-key textile-mode-map (kbd "M-s") 'save-buffer)
+(define-key text-mode-map (kbd "M-s") 'save-buffer)
+
+(global-set-key [(meta up)] 'beginning-of-buffer)
+(global-set-key [(meta down)] 'end-of-buffer)
+
+(global-set-key [(meta shift right)] 'ido-switch-buffer)
+(global-set-key [(meta shift up)] 'recentf-ido-find-file)
+(global-set-key [(meta shift down)] 'ido-find-file)
+(global-set-key [(meta shift left)] 'magit-status)
+
+(global-set-key [(meta H)] 'delete-other-windows)
+
+(global-set-key [(meta D)] 'backward-kill-word) ;; (meta d) is opposite
+
+(global-set-key [(meta N)] 'cleanup-buffer)
+
+(global-set-key [(control \])] 'indent-rigidly)
+
 
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o")

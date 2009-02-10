@@ -7,6 +7,20 @@
 (require 'textmate)
 (textmate-mode t)
 
+;; Mo betta scrolling
+(require 'pager)
+(global-set-key [remap scroll-up] 'pager-page-down)
+(global-set-key [remap cua-scroll-up] 'pager-page-down)
+(global-set-key [remap scroll-up-mark] 'pager-page-down-extend-region)
+(global-set-key [next] 'pager-page-down)
+(global-set-key [\S-next] 'pager-page-down-extend-region)
+(global-set-key [\M-up] 'pager-page-up)
+(global-set-key [remap scroll-down] 'pager-page-up)
+(global-set-key [remap cua-scroll-down] 'pager-page-up)
+(global-set-key [remap scroll-down-mark] 'pager-page-up-extend-region)
+(global-set-key [prior] 'pager-page-up)
+(global-set-key [\S-prior] 'pager-page-up-extend-region)
+
 ;; You know, like Readline.
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
 
@@ -34,6 +48,15 @@
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(autoload 'findr "findr" "Find file name." t)
+(define-key global-map (kbd "C-c S") 'findr)
+
+(autoload 'findr-search "findr" "Find text in files." t)
+(define-key global-map (kbd "C-c s") 'findr-search)
+
+(autoload 'findr-query-replace "findr" "Replace text in files." t)
+(define-key global-map (kbd "C-c R") 'findr-query-replace)
 
 ;; Window switching. (C-x o goes to the next window)
 ;(windmove-default-keybindings) ;; Shift+direction

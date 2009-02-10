@@ -4,10 +4,18 @@
   '(progn
      (require 'ruby-compilation)
      (setq ruby-use-encoding-map nil)
-     (add-hook 'ruby-mode-hook 'inf-ruby-keys)
+     (add-hook 'ruby-mode-hook
+               (lambda ()
+                 (inf-ruby-keys)
+                 (ruby-electric-mode t)))
+
+     ;(set (make-local-variable 'indent-tabs-mode) 'nil)
+     ;(set (make-local-variable 'tab-width) 2)
      (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
+     (define-key ruby-mode-map (kbd "C-j") 'newline)
      (define-key ruby-mode-map (kbd "C-M-h") 'backward-kill-word)
-     (define-key ruby-mode-map (kbd "C-c l") "lambda")))
+     (define-key ruby-mode-map (kbd "C-c l") "lambda")
+     (define-key ruby-mode-map (kbd "C-c v") 'ruby-eval-buffer)))
 
 (global-set-key (kbd "C-h r") 'ri)
 
@@ -85,8 +93,16 @@ exec-to-string command, but it works and seems fast"
                                   'flymake-display-err-menu-for-current-line)
                    (flymake-mode t))))))
 
-;; TODO: set up ri
-;; TODO: electric
+;;; ri
+
+(setq ri-ruby-script (expand-file-name "~/.emacs.d/lisp/ri-emacs/ri-emacs.rb"))
+(autoload 'ri (expand-file-name "~/.emacs.d/lisp/ri-emacs/ri-ruby.el") nil t)
+
+(add-hook 'ruby-mode-hook
+          (lambda ()
+             (local-set-key (kbd "f1") 'ri)
+             (local-set-key (kbd "f4") 'ri-ruby-show-args)
+             (local-set-key (kbd "M-C-i") 'ri-ruby-complete-symbol)))
 
 ;; Rinari
 ;; (require 'rinari)

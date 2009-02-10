@@ -60,6 +60,7 @@
 (require 'init-lisp)
 (require 'init-perl)
 (require 'init-ruby)
+(require 'init-ml)
 (require 'init-js)
 (require 'init-c)
 (require 'init-erlang)
@@ -84,7 +85,8 @@
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
-(server-start)
+;; Aquamacs handles this...
+;(server-start)
 
 (provide 'init)
 ;;; init.el ends here

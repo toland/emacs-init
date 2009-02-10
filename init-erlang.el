@@ -14,7 +14,7 @@
 	    ;; when starting an Erlang shell in Emacs, default in the node name
 	    (setq inferior-erlang-machine-options '("-sname" "emacs"))
 	    ;; add Erlang functions to an imenu menu
-	    (imenu-add-to-menubar "imenu")
+	    ;(imenu-add-to-menubar "imenu")
 	    ;; Bind RET to newline-and-indent and bind C-j to just newline...
 	    (define-key erlang-mode-map '[return] 'newline-and-indent)
 	    (define-key erlang-mode-map [(control j)] 'newline)))

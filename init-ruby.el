@@ -1,5 +1,9 @@
 ;;; init-ruby.el --- Some helpful Ruby code
 
+(defun ruby-eval-buffer () (interactive)
+  "Evaluate the buffer with ruby."
+  (shell-command-on-region (point-min) (point-max) "ruby"))
+
 (eval-after-load 'ruby-mode
   '(progn
      (require 'ruby-compilation)

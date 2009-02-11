@@ -6,6 +6,9 @@
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
+;; Kill the whole line
+(setq kill-whole-line t)
+
 ;; Snippets
 (require 'yasnippet)
 (yas/initialize)

@@ -94,6 +94,7 @@
 (global-set-key [f6] 'split-window-horizontally)
 (global-set-key [f7] 'split-window-vertically)
 (global-set-key [f8] 'delete-window)
+(global-set-key [f9] 'tabbar-local-mode)
 
 ;(global-set-key [(meta shift right)] 'ido-switch-buffer)
 ;(global-set-key [(meta shift up)] 'recentf-ido-find-file)

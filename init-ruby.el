@@ -99,14 +99,14 @@ exec-to-string command, but it works and seems fast"
 
 ;;; ri
 
-(setq ri-ruby-script (expand-file-name "~/.emacs.d/lisp/ri-emacs/ri-emacs.rb"))
-(autoload 'ri (expand-file-name "~/.emacs.d/lisp/ri-emacs/ri-ruby.el") nil t)
+;; (setq ri-ruby-script (expand-file-name "~/.emacs.d/vendor/ri-emacs/ri-emacs.rb"))
+;; (autoload 'ri (expand-file-name "~/.emacs.d/vendor/ri-emacs/ri-ruby.el") nil t)
 
-(add-hook 'ruby-mode-hook
-          (lambda ()
-             (local-set-key (kbd "f1") 'ri)
-             (local-set-key (kbd "f4") 'ri-ruby-show-args)
-             (local-set-key (kbd "M-C-i") 'ri-ruby-complete-symbol)))
+;; (add-hook 'ruby-mode-hook
+;;           (lambda ()
+;;              (local-set-key [f1] 'ri)
+;;              (local-set-key [f4] 'ri-ruby-show-args)
+;;              (local-set-key (kbd "M-C-i") 'ri-ruby-complete-symbol)))
 
 ;; Rinari
 ;; (require 'rinari)

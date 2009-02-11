@@ -84,6 +84,9 @@
 ;; Should be able to eval-and-replace anywhere.
 (global-set-key (kbd "C-c e") 'eval-and-replace)
 
+;; Duplicate the current line
+(global-set-key (kbd "C-c d") 'duplicate-current-line)
+
 ;; What it says on the box - toggle full screen mode
 (global-set-key (kbd "M-n") 'toggle-fullscreen)
 

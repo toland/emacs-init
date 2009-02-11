@@ -78,6 +78,18 @@
   (untabify-buffer)
   (delete-trailing-whitespace))
 
+(defun duplicate-current-line ()
+  "Duplicate the current line."
+  (interactive)
+  (beginning-of-line nil)
+  (let ((b (point)))
+    (end-of-line nil)
+    (copy-region-as-kill b (point)))
+  (beginning-of-line 2)
+  (open-line 1)
+  (yank)
+  (back-to-indentation))
+
 (defun recentf-ido-find-file ()
   "Find a recent file using ido."
   (interactive)

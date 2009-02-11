@@ -33,15 +33,15 @@
                              (cond
                               ((and (listp symbol) (imenu--subalist-p symbol))
                                (addsymbols symbol))
-                              
+
                               ((listp symbol)
                                (setq name (car symbol))
                                (setq position (cdr symbol)))
-                              
+
                               ((stringp symbol)
                                (setq name symbol)
                                (setq position (get-text-property 1 'org-imenu-marker symbol))))
-                             
+
                              (unless (or (null position) (null name))
                                (add-to-list 'symbol-names name)
                                (add-to-list 'name-and-pos (cons name position))))))))
@@ -56,12 +56,12 @@
   (make-local-variable 'column-number-mode)
   (column-number-mode t)
   (setq save-place t)
+  (whitespace-mode t)
   (auto-fill-mode) ;; in comments only
   (if window-system (hl-line-mode t))
   (pretty-lambdas)
   ;; TODO: this breaks in js2-mode!
-  ;;(if (functionp 'idle-highlight) (idle-highlight))
-  )
+  (if (functionp 'idle-highlight) (idle-highlight)))
 
 (defun untabify-buffer ()
   (interactive)
@@ -77,6 +77,18 @@
   (indent-buffer)
   (untabify-buffer)
   (delete-trailing-whitespace))
+
+(defun duplicate-current-line ()
+  "Duplicate the current line."
+  (interactive)
+  (beginning-of-line nil)
+  (let ((b (point)))
+    (end-of-line nil)
+    (copy-region-as-kill b (point)))
+  (beginning-of-line 2)
+  (open-line 1)
+  (yank)
+  (back-to-indentation))
 
 (defun recentf-ido-find-file ()
   "Find a recent file using ido."

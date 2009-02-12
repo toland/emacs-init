@@ -2,6 +2,9 @@
 
 From Phil Hagelberg's emacs-starter-kit.
 
+Heavily customized by Phil Toland. Intended for use with the official Cocoa
+Emacs build.
+
 ## Current or planned customizations by Geoffrey Grosenbach (topfunky)
 
 * Intended for use with [Carbon Emacs](http://www.google.com/search?hl=en-US&q=carbon+emacs&rls=0.4&client=stainless&ie=UTF-8)

@@ -70,7 +70,7 @@
 
 ;; Set the color of the highlighted line
 (require 'hl-line)
-(set-face-background 'hl-line "#444")
+(set-face-background 'hl-line "#3c3c3c")
 
 ;; Color Themes
 (require 'color-theme)
@@ -226,7 +226,7 @@
      (fg:erc-color-face9 ((t (:foreground "khaki"))))
      (fixed-pitch ((t (:family "Anonymous"))))
      (font-lock-builtin-face ((t (:bold t :foreground "#c2cff1" :weight bold))))
-     (font-lock-comment-face ((t (:foreground "#777"))))
+     (font-lock-comment-face ((t (:foreground "#707070"))))
      (font-lock-constant-face ((t (:bold t :foreground "#52c62b" :weight bold))))
      (font-lock-doc-face ((t (:italic t :slant italic :foreground "#6688ee"))))
      (font-lock-doc-string-face ((t (:foreground "#6688ee"))))
@@ -314,7 +314,7 @@
      (info-node ((t (:bold t :foreground "DodgerBlue1" :underline t :weight bold))))
      (info-xref ((t (:bold t :foreground "DodgerBlue3" :weight bold))))
      (isearch ((t (:background "#d2d2d2" :foreground "black"))))
-     (isearch-lazy-highlight-face ((t (:background "#333"))))
+     (isearch-lazy-highlight-face ((t (:background "#303030"))))
      (italic ((t (:italic t :foreground "chocolate3" :slant italic))))
      (menu ((t (nil))))
      (message-cited-text-face ((t (:foreground "White"))))

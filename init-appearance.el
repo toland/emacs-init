@@ -19,7 +19,7 @@
 (setq-default cursor-in-non-selected-windows nil)
 
 ;; can be set to '(bar . 2) or 't
-(setq-default cursor-type '(hbar . 2))
+(setq-default cursor-type '(bar . 2))
 
 ;; turn the blinking off
 (blink-cursor-mode -1)

@@ -87,6 +87,9 @@
 ;; Duplicate the current line
 (global-set-key (kbd "C-c d") 'duplicate-current-line)
 
+;; Make the delete key behave
+(global-set-key (kbd "<kp-delete>") 'delete-char)
+
 ;; What it says on the box - toggle full screen mode
 (global-set-key (kbd "M-n") 'toggle-fullscreen)
 

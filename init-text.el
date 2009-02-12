@@ -1,4 +1,4 @@
-;;; init-text.el --- Basic text editing features   
+;;; init-text.el --- Basic text editing features
 
 ;; No tabs, please
 (set-default 'indent-tabs-mode nil)
@@ -8,6 +8,9 @@
 
 ;; Kill the whole line
 (setq kill-whole-line t)
+
+;; Show column numbers
+(column-number-mode t)
 
 ;; Snippets
 (require 'yasnippet)

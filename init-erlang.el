@@ -15,7 +15,7 @@
           (lambda ()
             (coding-hook)
             ;; Bind RET to newline-and-indent and bind C-j to just newline...
-            (define-key erlang-mode-map '[return] 'newline-and-indent)
+            (define-key erlang-mode-map [return] 'newline-and-indent)
             (define-key erlang-mode-map [(control j)] 'newline)))
 
 ;;; Distel

@@ -1,0 +1,3 @@
+[submodule "vendor/erlware-mode"]
+	path = vendor/erlware-mode
+	url = http://git.erlware.org/erlware-mode.git

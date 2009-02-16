@@ -82,19 +82,19 @@
 (defvar *textmate-keybindings-list* `((textmate-next-line 
                                      [A-return]    [M-return])
                                      (textmate-clear-cache 
-                                      ,(kbd "A-M-t") [(control c)(control t)])
+                                      ,(kbd "s-M-t") [(control c)(control t)])
                                      (align 
-                                      ,(kbd "A-M-]") [(control c)(control a)])
+                                      ,(kbd "s-M-]") [(control c)(control a)])
                                      (indent-according-to-mode 
-                                      ,(kbd "A-M-[") nil)
+                                      ,(kbd "s-M-[") nil)
                                      (indent-region 
-                                      ,(kbd "A-]")   [(control tab)])
+                                      ,(kbd "s-]")   [(control tab)])
                                      (comment-or-uncomment-region-or-line 
-                                      ,(kbd "A-/")   [(control c)(control k)])
+                                      ,(kbd "s-/")   [(control c)(control k)])
                                      (textmate-goto-file 
-                                      ,(kbd "A-t")   [(meta t)])
+                                      ,(kbd "s-t")   [(meta t)])
                                      (textmate-goto-symbol 
-                                      ,(kbd "A-T")   [(meta T)])))
+                                      ,(kbd "s-T")   [(meta T)])))
 
 ;;; Bindings
 
@@ -111,7 +111,7 @@
     (define-key osx-key-mode-map (kbd "A-t") 'textmate-goto-file)
     (define-key osx-key-mode-map (kbd "A-T") 'textmate-goto-symbol)) 
  
-  (let ((member) (i 0) (access (if (boundp 'aquamacs-version) 'cadr 'caddr)))
+  (let ((member) (i 0) (access (if (or (boundp 'aquamacs-version) ns-initialized) 'cadr 'caddr)))
     (setq member (nth i *textmate-keybindings-list*))
     (while member
       (if (funcall access member)
@@ -125,10 +125,38 @@
 
 ;;; Commands
 
+;; TextMate-like commenting
+;; http://paste.lisp.org/display/42657
+(defun comment-or-uncomment-line (&optional lines)
+  "Comment current line. Argument gives the number of lines
+forward to comment"
+  (interactive "P")
+  (comment-or-uncomment-region
+   (line-beginning-position)
+   (line-end-position lines)))
+
+(defun comment-or-uncomment-region-or-line (&optional lines)
+  "If the line or region is not a comment, comments region
+if mark is active, line otherwise. If the line or region
+is a comment, uncomment."
+  (interactive "P")
+  (if mark-active
+      (if (< (mark) (point))
+          (comment-or-uncomment-region (mark) (point))
+        (comment-or-uncomment-region (point) (mark)))
+    (comment-or-uncomment-line lines)))
+
 (defun textmate-next-line ()
   (interactive)
   (end-of-line)
   (newline-and-indent))
+
+(defun textmate-previous-line ()
+  (interactive)
+  (beginning-of-line)
+  (newline-and-indent)
+  (previous-line)
+  (indent-according-to-mode))
 
 ;; http://chopmo.blogspot.com/2008/09/quickly-jumping-to-symbols.html
 (defun textmate-goto-symbol ()

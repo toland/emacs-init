@@ -5,6 +5,10 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
 
+;; Set the initial frame size
+(setq default-frame-alist
+      (append default-frame-alist '((width . 100) (height . 60))))
+
 ;; Enable the mouse wheel
 (mouse-wheel-mode t)
 

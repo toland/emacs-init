@@ -63,7 +63,7 @@
     (setq default-directory  (search-up filename default-directory))
     (compile (concat "cd " default-directory " && " command))
     (setq default-directory old-default-dir)))
-  
+
 (defun run-make()
   (interactive)
   (search-and-run "Makefile" "make"))

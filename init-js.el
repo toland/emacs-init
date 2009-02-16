@@ -30,7 +30,8 @@
                                             (indent-for-tab-command)
                                             (back-to-indentation)))
 
-     (setq js2-bounce-indent-flag nil
+     (setq javascript-indent-level 2
+           js2-bounce-indent-flag nil
            js2-indent-on-enter-key t)
 
      (defun js-continued-var-decl-list-p ()
@@ -42,7 +43,7 @@
               (not (save-excursion
                      (js-re-search-backward
                       ";\\|[^, \t][ \t]*\\(/[/*]\\|$\\)" start t))))))
-     
+
      (defun js-proper-indentation (parse-status)
        "Return the proper indentation for the current line."
        (save-excursion

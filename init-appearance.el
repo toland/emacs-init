@@ -36,6 +36,9 @@
 ;; Don't wrap long lines
 (setq-default truncate-lines t)
 
+;; Don't show time in the modeline
+(display-time-mode -1)
+
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
 (setq ido-enable-prefix nil
@@ -60,9 +63,8 @@
 (global-linum-mode t)
 
 ;; Font
-;; This is managed by Aquamacs
 ;(set-face-font 'default "-apple-anonymous-medium-r-normal--14-*-*-*-*-*-iso10646-1")
-;(set-face-attribute 'default nil :family "anonymous" :height 140)
+(set-face-attribute 'default nil :family "anonymous" :height 140)
 
 ;; Font lock
 (global-font-lock-mode t)

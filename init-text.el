@@ -12,6 +12,9 @@
 ;; Show column numbers
 (column-number-mode t)
 
+;; Delete the region
+(delete-selection-mode t)
+
 ;; Snippets
 (require 'yasnippet)
 (yas/initialize)

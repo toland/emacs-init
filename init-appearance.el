@@ -377,6 +377,36 @@
 
 ;;; theme-end
 
+
+(defun color-theme-eiffel ()
+  "Based on the TextMate Eiffel theme"
+  (interactive)
+  (color-theme-install
+   '(color-theme-eiffel
+     ((background-color . "white")
+      (foreground-color . "black")
+      (background-mode . light)
+      (mouse-color . "grey15")
+      (cursor-color . "grey15"))
+     (default ((t nil)))
+     (font-lock-comment-face ((t (:foreground "#666666"))))
+     (font-lock-string-face ((t (:foreground "#008000"))))
+     (font-lock-keyword-face ((t (:foreground "#0100b6"))))
+     (font-lock-warning-face ((t (:bold t :foreground "VioletRed"))))
+     (font-lock-constant-face ((t (:foreground "#c5060b"))))
+     (font-lock-type-face ((t (:foreground "NavyBlue"))))
+     (font-lock-variable-name-face ((t (:foreground "#0206ff"))))
+     (font-lock-function-name-face ((t (:foreground "#400080"))))
+     (font-lock-builtin-face ((t (:foreground "#585cf6"))))
+     (highline-face ((t (:background "Grey95"))))
+     (show-paren-match-face ((t (:background "Grey80"))))
+     (region ((t (:background "Grey80"))))
+     (highlight ((t (:foreground "ForestGreen"))))
+     (secondary-selection ((t (:background "NavyBlue" :foreground "white"))))
+     (widget-field-face ((t (:background "NavyBlue"))))
+     (widget-single-line-field-face ((t (:background "RoyalBlue")))))) )
+
+
 ;; Activate theme
 (color-theme-anonymous)
 

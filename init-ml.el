@@ -6,10 +6,10 @@
 (setq sml-program-name "/opt/local/bin/sml")
 
 (add-hook 'sml-mode-hook
-	  (lambda ()
-	    ;; Bind RET to newline-and-indent and bind C-j to just newline...
-	    (define-key sml-mode-map '[return] 'newline-and-indent)
-	    (define-key sml-mode-map [(control j)] 'newline)))
+          (lambda ()
+            ;; Bind RET to newline-and-indent and bind C-j to just newline...
+            (define-key sml-mode-map [return] 'newline-and-indent)
+            (define-key sml-mode-map [(control j)] 'newline)))
 
 
 ;;; Haskell
@@ -37,15 +37,16 @@
 ;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 ;(add-hook 'haskell-mode-hook 'turn-on-haskell-hugs)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
-;(add-hook 'haskell-mode-hook
-;   (function
-;    (lambda ()
-;      (setq haskell-program-name "ghci")
-;      (setq haskell-ghci-program-name "ghci6")
-;      (setq haskell-ghci-program-args
-;         '("-fcontext-stack=30"
-;           "-fglasgow-exts"
-;           "-farrows")))))
+(add-hook 'haskell-mode-hook
+   (function
+    (lambda ()
+      (setq haskell-font-lock-symbols t)
+      (setq haskell-program-name "ghci")
+      (setq haskell-ghci-program-name "ghci6")
+      (setq haskell-ghci-program-args
+         '("-fcontext-stack=30"
+           "-fglasgow-exts"
+           "-farrows")))))
 
 
 
